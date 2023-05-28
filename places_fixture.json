@@ -1,0 +1,29 @@
+[
+  {
+    "model": "places.place",
+    "pk": 1,
+    "fields": {
+      "name": "Kyiv",
+      "description": "Description for Place 1",
+      "geom": "POINT (50.53426706977131 30.51876068789841)"
+    }
+  },
+  {
+    "model": "places.place",
+    "pk": 2,
+    "fields": {
+      "name": "Lviv",
+      "description": "Description for Place 2",
+      "geom": "POINT (49.87582357799933 23.975094176088948)"
+    }
+  },
+  {
+    "model": "places.place",
+    "pk": 3,
+    "fields": {
+      "name": "Crimea",
+      "description": "Description for Place 2",
+      "geom": "POINT (45.270996281411 34.105256264585385)"
+    }
+  }
+]
