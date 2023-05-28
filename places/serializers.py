@@ -15,6 +15,16 @@ class PlaceListSerializer(serializers.ModelSerializer):
         ]
 
     def get_geom(self, obj) -> Point | None:
+        """
+        Get the Point geometry based on the provided coordinates.
+        Args:
+            obj: The object for which to get the Point geometry.
+        Returns:
+            Point | None: The Point geometry if coordinates are provided, otherwise None.
+        Raises:
+            serializers.ValidationError: If the coordinates are not in the correct format.
+        """
+
         coordinates = self.context["request"].data.get("geom")
         if coordinates:
             try:
@@ -27,10 +37,25 @@ class PlaceListSerializer(serializers.ModelSerializer):
         return None
 
     def create(self, validated_data: dict) -> Place:
+        """
+        Create a new Place instance.
+        Args:
+            validated_data (dict): The validated data for creating the Place instance.
+        Returns:
+            Place: The created Place instance.
+        """
         validated_data["geom"] = self.get_geom(None)
         return super().create(validated_data)
 
     def update(self, instance: Place, validated_data: dict) -> Place:
+        """
+        Update an existing Place instance.
+        Args:
+            instance (Place): The existing Place instance to update.
+            validated_data (dict): The validated data for updating the Place instance.
+        Returns:
+            Place: The updated Place instance.
+        """
         validated_data["geom"] = self.get_geom(None)
         instance.name = validated_data.get("name", instance.name)
         instance.description = validated_data.get("description", instance.description)
