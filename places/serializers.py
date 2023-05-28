@@ -17,7 +17,12 @@ class PlaceListSerializer(serializers.ModelSerializer):
     def get_geom(self, obj):
         coordinates = self.context["request"].data.get("geom")
         if coordinates:
-            lon, lat = map(float, coordinates.split(","))
+            try:
+                lon, lat = map(float, coordinates.split(","))
+            except ValueError:
+                raise serializers.ValidationError(
+                    "You must set geom in format: 'number, number'"
+                )
             return Point(lon, lat)
         return None
 
