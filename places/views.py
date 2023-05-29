@@ -16,7 +16,7 @@ class PlaceListView(viewsets.ModelViewSet):
 
     def get_queryset(self) -> QuerySet[Place]:
         """
-        Get the queryset of places with optional coordinate parameter.
+        Get the queryset of places with optional coordinate parameter
         Args:
             self: The instance of the view.
         Returns:
@@ -26,7 +26,6 @@ class PlaceListView(viewsets.ModelViewSet):
         """
         queryset = self.queryset
         coordinate = self.request.query_params.get("coordinate", None)
-        num_points = int(self.request.query_params.get("num_points", 1))
         if coordinate:
             try:
                 lon, lat = map(float, coordinate.split(","))
@@ -37,7 +36,7 @@ class PlaceListView(viewsets.ModelViewSet):
                 distance=DistanceFunc("geom", point)
             ).order_by(
                 "distance"
-            )[:num_points]
+            )[:1]
         return queryset
 
     @extend_schema(
