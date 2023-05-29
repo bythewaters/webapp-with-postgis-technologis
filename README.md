@@ -15,11 +15,14 @@ pip install -r requirements.txt
 ## Run with Docker:
 - Docker should be installed
 ```
-- docker-compose build
-- docker-compose up
+docker-compose build
+docker-compose up
 ```
 - Use the following command to load prepared data from fixture in docker(if you need):
-  `docker-compose run --rm app python manage.py loaddata places_fixture.json`
+```
+docker exec -t -i <id_docker_container> sh
+python manage.py loaddata places_fixture.json
+```
 
 ## Getting access:
 - via /api/doc/swagger/ --> Detail api documentation by swagger
